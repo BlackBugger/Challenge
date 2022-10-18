@@ -1,8 +1,7 @@
-import React, { useReducer, useState } from 'react';
 import { deleteComment } from '../actions/deleteComment';
 import '../App.css';
 import {useSelector} from 'react-redux';
-import { api } from '../api/api';
+
 
 
 export default function DeleteModal() {
