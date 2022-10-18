@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useReducer, useState} from "react";
+import { useEffect, useState} from "react";
 import "./App.css";
 import amy from "./images/avatars/image-amyrobson.png";
 import { getComments, getReplies } from "./actions/getData";
@@ -11,6 +11,7 @@ import DeleteComment from "./components/deleteComment";
 import DeleteReply from "./components/deleteReply";
 
 function App() {
+  // const [isReadonly, setIsReadonly] = useState(true);
   const [comments, setComments] = useState([]);
   const [replies, setReplies] = useState([]);
   const [parentId, setparentId] = useState();
@@ -18,12 +19,12 @@ function App() {
   const [addReply, setAddReply] = useState("");
 
   const [replyTo, setReplyTo] = useState("");
-  const [updateThis, setUpdateThis] = useState("");
+  // const [updateThis, setUpdateThis] = useState("");
 
-  const [ReducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+
 
   // This is if you want to use USESTATE => const [deleteID, setDeleteID] = useState();
-  const { deleteID } = useSelector((state) => state.deleteID);
+
   const dispatch = useDispatch();
 
   const mainUser = "Josep";
@@ -35,7 +36,7 @@ function App() {
       content: addComment,
     };
 
-    const response = await api.post("/api/comments", body);
+    await api.post("/api/comments", body);
     getComments(setComments);
 
     document.querySelector("#text").value = "";
@@ -47,7 +48,7 @@ function App() {
       content: addReply,
       parentId: parentId,
     };
-    const response = await api.post("/api/replies", body);
+    await api.post("/api/replies", body);
     getReplies(setReplies);
 
     document.querySelector("#text").value = "";
@@ -58,7 +59,7 @@ function App() {
       content: addReply,
       parentId: parentId,
     };
-    const response = await api.post("/api/replies", body);
+    await api.post("/api/replies", body);
     getReplies(setReplies);
 
     document.querySelector("#text").value = "";
@@ -81,8 +82,8 @@ function App() {
   }
 // SELECT ID FOR UPDATE
   function selectForUpdate(id) {
-    setUpdateThis(id);
-    setIsReadonly(false);
+    // setUpdateThis(id);
+    // setIsReadonly(false);
     console.log("ID THERE", id);
   }
 
@@ -102,7 +103,7 @@ function App() {
       username: username,
       parentId: parentId,
     };
-    const response = await api.patch(`/api/comments/score/${data._id}`, body);
+    await api.patch(`/api/comments/score/${data._id}`, body);
     getComments(setComments);
   };
 
@@ -122,7 +123,7 @@ function App() {
       username: username,
       parentId: parentId,
     };
-    const response = await api.patch(`/api/comments/score/${data._id}`, body);
+    await api.patch(`/api/comments/score/${data._id}`, body);
     getComments(setComments);
   };
 
@@ -141,7 +142,7 @@ function App() {
       username: username,
       parentId: parentId,
     };
-    const response = await api.patch(`/api/replies/score/${data._id}`, body);
+    await api.patch(`/api/replies/score/${data._id}`, body);
     getReplies(setReplies);
   };
 
@@ -161,23 +162,23 @@ function App() {
       username: username,
       parentId: parentId,
     };
-    const response = await api.patch(`/api/replies/score/${data._id}`, body);
+    await api.patch(`/api/replies/score/${data._id}`, body);
     getReplies(setReplies);
   };
 
   useEffect(() => {
     getComments(setComments);
     getReplies(setReplies);
-  }, [ReducerValue]);
+  }, []);
 
-  const [isReadonly, setIsReadonly] = useState(true);
+
 
   return (
     <div className='App'>
       <div className='container-fluid d-flex flex-column align-items-center p-4'>
         {comments.map((comments) => {
           return (
-            <div className='comment-area d-flex flex-column flex-end'>
+            <div className='comment-area d-flex flex-column align-items-end'>
               <div className='comment-card d-flex' key={comments._id}>
                 <div className='score'>
                   <button onClick={() => addToScore(comments)}>+</button>
