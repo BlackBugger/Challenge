@@ -177,7 +177,7 @@ function App() {
       <div className='container-fluid d-flex flex-column align-items-center p-4'>
         {comments.map((comments) => {
           return (
-            <div className='comment-area d-flex flex-column g'>
+            <div className='comment-area d-flex flex-column flex-end'>
               <div className='comment-card d-flex' key={comments._id}>
                 <div className='score'>
                   <button onClick={() => addToScore(comments)}>+</button>
@@ -192,7 +192,7 @@ function App() {
                       <p className='time'>{comments.createdAt}</p>
                     </div>
                     <div className='actions'>
-                      {comments.username == mainUser && (
+                      {comments.username === mainUser && (
                         <div>
                           <button onClick={() => selectForDelete(comments._id)} data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
                             Delete
@@ -208,7 +208,7 @@ function App() {
                   <p className='comment-content'>{comments.content}</p>
 
                   {/* CURRENTLY DEVELOPING EDIT AREA */}
-                  {/* {comments._id == updateThis && (
+                  {/* {comments._id === updateThis && (
                     <textarea readOnly={isReadonly} className='comment-content'>
                       {comments.content}
                     </textarea>
@@ -240,7 +240,7 @@ function App() {
                               <a href='#'>{replies.username} </a>
                               <p className='time'>{replies.createdAt}</p>
                             </div>
-                            {replies.username == mainUser && (
+                            {replies.username === mainUser && (
                               <div>
                                 <button onClick={() => selectForDelete(replies._id)} data-bs-toggle='modal' data-bs-target='#deleteReply'>
                                   Delete
@@ -258,7 +258,7 @@ function App() {
                         </div>
                       </div>
 {/* REPLY TO REPLY */}
-                      {replies._id == replyTo && (
+                      {replies._id === replyTo && (
                         <div className='comment-replyToReply'>
                           <div className='user'>
                             <img src={amy} alt='avatar' />
@@ -275,7 +275,7 @@ function App() {
                   );
                 })}
 {/* REPLY TO COMMENT */}
-              {comments._id == replyTo && (
+              {comments._id === replyTo && (
                 <div className='comment-replyToComment'>
                   <div className='user'>
                     <img src={amy} alt='avatar' />
