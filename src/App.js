@@ -1,12 +1,13 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import amy from "./images/avatars/image-amyrobson.png";
 import { getComments, getReplies } from "./actions/getData";
 import { api } from "./api/api";
-import { useSelector, useDispatch } from "react-redux";
-import { setDeleteId} from "./redux/deleteId";
+import {useDispatch } from "react-redux";
+import { setDeleteId } from "./redux/deleteId";
 import DeleteComment from "./components/deleteComment";
 import DeleteReply from "./components/deleteReply";
 
@@ -20,8 +21,6 @@ function App() {
 
   const [replyTo, setReplyTo] = useState("");
   // const [updateThis, setUpdateThis] = useState("");
-
-
 
   // This is if you want to use USESTATE => const [deleteID, setDeleteID] = useState();
 
@@ -53,7 +52,7 @@ function App() {
 
     document.querySelector("#text").value = "";
   };
-// CREATE REPLY TO REPLY
+  // CREATE REPLY TO REPLY
   const ReplyToReply = async () => {
     const body = {
       content: addReply,
@@ -75,12 +74,12 @@ function App() {
     setparentId(id._id);
     setReplyTo(id._id);
   }
-// SELECT ID FOR REPLY
+  // SELECT ID FOR REPLY
   function IDForReply(id) {
     setparentId(id.parentId);
     setReplyTo(id._id);
   }
-// SELECT ID FOR UPDATE
+  // SELECT ID FOR UPDATE
   function selectForUpdate(id) {
     // setUpdateThis(id);
     // setIsReadonly(false);
@@ -171,8 +170,6 @@ function App() {
     getReplies(setReplies);
   }, []);
 
-
-
   return (
     <div className='App'>
       <div className='container-fluid d-flex flex-column align-items-center p-4'>
@@ -258,7 +255,7 @@ function App() {
                           </p>
                         </div>
                       </div>
-{/* REPLY TO REPLY */}
+                      {/* REPLY TO REPLY */}
                       {replies._id === replyTo && (
                         <div className='comment-replyToReply'>
                           <div className='user'>
@@ -275,7 +272,7 @@ function App() {
                     </div>
                   );
                 })}
-{/* REPLY TO COMMENT */}
+              {/* REPLY TO COMMENT */}
               {comments._id === replyTo && (
                 <div className='comment-replyToComment'>
                   <div className='user'>
@@ -308,13 +305,11 @@ function App() {
             </button>
           </div>
         </form>
-
       </div>
 
       {/* MODALSZ */}
       <DeleteComment />
       <DeleteReply />
-      
     </div>
   );
 }
